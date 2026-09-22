@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  postgres-auth:
+    image: postgres:18
+    container_name: postgres-multi-agent-container
+
+    environment:
+      POSTGRES_DB: multi_agent_memory_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5435:5432"
+
+    volumes:
+      - postgres-multi-agent-data:/var/lib/postgresql
+
+    networks:
+      - multi-agent-network
+volumes:
+  postgres-multi-agent-data:
+
+networks:
+  multi-agent-network:
+    driver: bridge
